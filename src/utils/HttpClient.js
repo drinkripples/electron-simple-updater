@@ -60,10 +60,11 @@ class HttpClient {
    * @return {object}
    */
   getHttpOptions(isDownload = false) {
+    let options = {};
     if (isDownload) {
-      const options = this.options.downloadHttp || {};
+      options = this.options.downloadHttp || {};
     } else {
-      const options = this.options.jsonHttp || {};
+      options = this.options.jsonHttp || {};
     }
 
     return {
