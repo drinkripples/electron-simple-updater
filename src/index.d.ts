@@ -40,8 +40,9 @@ declare namespace SimpleUpdater {
     /**
      * http.request options
      */
-    http?: object;
-
+    jsonHttp?: object;
+    downloadHttp?: object;
+    
     /**
      * You can pass
      * [electron-log]{@link https://github.com/megahertz/electron-log},
