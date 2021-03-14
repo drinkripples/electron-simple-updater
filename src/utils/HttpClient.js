@@ -13,7 +13,7 @@ class HttpClient {
 
   async getJson(url) {
     return new Promise((resolve, reject) => {
-      request.get(url, this.getHttpOptions(), (err, response) => {
+      request.get(url, this.getHttpOptions(false), (err, response) => {
         if (err) {
           reject(err);
           return;
@@ -33,7 +33,7 @@ class HttpClient {
   async downloadFile(url, savePath) {
     return new Promise((resolve, reject) => {
       const options = {
-        ...this.getHttpOptions(),
+        ...this.getHttpOptions(true),
         url,
         method: 'GET',
         downloadlocation: savePath,
@@ -59,8 +59,13 @@ class HttpClient {
    * @private
    * @return {object}
    */
-  getHttpOptions() {
-    const options = this.options.http || {};
+  getHttpOptions(isDownload = false) {
+    if (isDownload) {
+      const options = this.options.downloadHttp || {};
+    } else {
+      const options = this.options.jsonHttp || {};
+    }
+
     return {
       ...options,
       headers: {

@@ -30,7 +30,13 @@ class Options {
     /**
      * @type {object}
      */
-    this.http = {};
+    this.jsonHttp = {};
+
+
+    /**
+     * @type {object}
+     */
+    this.downloadHttp = {};
 
     /**
      * @type {string}
