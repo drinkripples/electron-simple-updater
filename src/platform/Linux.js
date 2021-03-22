@@ -40,13 +40,12 @@ class Linux extends Platform {
 
     const updateScript = `
       if [ "\${RESTART_REQUIRED}" = 'true' ]; then
-        cp -f "\${UPDATE_FILE}" "\${APP_IMAGE}"
+        mv -f "\${UPDATE_FILE}" "\${APP_IMAGE}"
         (exec "\${APP_IMAGE}") & disown $!
       else
         (sleep 2 && cp -f "\${UPDATE_FILE}" "\${APP_IMAGE}") & disown $!
       fi
       kill "\${OLD_PID}" $(ps -h --ppid "\${OLD_PID}" -o pid)
-      rm "\${UPDATE_FILE}"
     `;
 
     const proc = spawn('/bin/bash', ['-c', updateScript], {
